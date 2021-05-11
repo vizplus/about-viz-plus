@@ -24,6 +24,8 @@ else{
 	$html=str_replace('<h1>','<h1 class="left faq" id="'.$filename.'">',$html);
 	$html=preg_replace('~<h2>(.*)</h2>~iUs','<h2 class="left faq" id="$1">$1</h2>',$html);
 	$html=preg_replace('~<h3>(.*)</h3>~iUs','<h3 class="left faq" id="$1">$1</h3>',$html);
+
+	$html=str_replace('<p><img src="https://raw.githubusercontent.com/vizplus/whitepaper/master/VIZ-part3-6-900.jpg" alt="Экосистема ВИЗа" /></p>','<center><img src="/git/whitepaper/VIZ-part3-06.svg" style="margin:0;max-height:95vh;" alt="Экосистема ВИЗа" /></center>',$html);
 	print $html;
 	print '</div>';
 

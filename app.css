@@ -2590,6 +2590,20 @@ a.no-shadow{
 	margin:1em 0;
 	border:2px solid #ddd;
 }
+
+.select-lang{
+	text-align:center;
+	font-size:0.8em;
+	margin-bottom:10px;
+}
+.select-lang a{
+	box-shadow:none;
+	color:rgba(50,80,50,0.8);
+	margin:4px;
+}
+.select-lang a:hover{
+	color:rgba(0,30,0,0.8);
+}
 @media only screen and (min-width:0) and (max-width:1650px){
 	.cards-menu{
 		display:none !important;

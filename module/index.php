@@ -3,19 +3,28 @@ ob_start();
 $cache=true;
 
 $replace['index_page_selected']=' selected';
-$replace['title']='Главная - '.$replace['title'];
-$replace['description']='Подборка вопросов и ответов предназначена в основном для новичков и покрывает основные трудности, с которыми они могут столкнуться в ВИЗе.';
+$replace['title']=$ltmp_arr['index']['title'].' - '.$replace['title'];
+$replace['description']=$ltmp_arr['index']['description'];
 include('./class/Parsedown.php');
 $Parsedown = new Parsedown();
 
 $cache=false;
-if(file_exists('./faq.cache')){
-	$cache=file_get_contents('./faq.cache');
+
+$file_prefix='';
+if('ru'!=$ltmp_current){
+	$file_prefix='-'.$ltmp_current;
+}
+if(!file_exists('./git/viz-faq/faq'.$file_prefix.'.md')){
+	$file_prefix='';
+}
+
+if(file_exists('./faq'.$file_prefix.'.cache')){
+	$cache=file_get_contents('./faq'.$file_prefix.'.cache');
 	print $cache;
 }
 else{
-	$contents_id='виз-в-вопросах-и-ответах';
-	$return_to_contents='<div class="return-to-contents captions"><a href="#'.$contents_id.'">Вернуться к содержанию</a></div>';
+	$contents_id=$ltmp_arr['index']['contents_id'];
+	$return_to_contents='<div class="return-to-contents captions"><a href="#'.$contents_id.'">'.$ltmp_arr['index']['return_to_contents'].'</a></div>';
 	$return_to_contents='';
 
 	print '
@@ -25,7 +34,7 @@ else{
 		'faq',
 	];
 	foreach($files_arr as $filename){
-		$file=file_get_contents('./git/viz-faq/'.$filename.'.md');
+		$file=file_get_contents('./git/viz-faq/'.$filename.$file_prefix.'.md');
 		print '<div class="card">';
 		$html=$Parsedown->text($file);
 		$html.='<!-- end -->';
@@ -45,8 +54,9 @@ else{
 			$context=$stack[2][$i];
 			preg_replace('~[^a-zа-яё\-]~iUs','',$context);
 			$context=mb_strtolower($context,'UTF-8');
+			$context=str_replace('  ',' ',$context);
 			$context=str_replace(' ','-',$context);
-			$new='<!-- end -->'.($stack[2][$i]!='Общие вопросы'?$return_to_contents:'').'<!-- section --><h2 class="left faq" id="'.$context.'">'.$stack[2][$i].'</h2>';
+			$new='<!-- end -->'.($stack[2][$i]!=$ltmp_arr['index']['first_part_without_return']?$return_to_contents:'').'<!-- section --><h2 class="left faq" id="'.$context.'">'.$stack[2][$i].'</h2>';
 			$html=str_replace($part,$new,$html);
 		}
 		$html=str_replace('<!-- section -->','</div><div class="card">',$html);
@@ -60,7 +70,7 @@ else{
 		preg_match_all('~\<h3(.*)\>(.*)\<\/h3\>(.*)\<\!~iUs',$html,$stack);
 
 		foreach($stack[0] as $i=>$part){
-			if('Содержание:'!=$stack[2][$i]){
+			if($ltmp_arr['index']['remove_contents_part']!=$stack[2][$i]){
 				$new='
 				<div class="toggle-box">
 					<div class="section"><div class="arrow"></div><span>'.$stack[2][$i].'</span></div>
@@ -85,7 +95,7 @@ else{
 }
 $content=ob_get_contents();
 if(!$cache){
-	file_put_contents('./faq.cache',$content);
-	chmod('./faq.cache',0777);
+	file_put_contents('./faq'.$file_prefix.'.cache',$content);
+	chmod('./faq'.$file_prefix.'.cache',0777);
 }
 ob_end_clean();
