@@ -25,7 +25,7 @@
 		<div class="logo"><a href="/" class="prefix{index_page_selected}">about.</a><a href="https://viz.plus/"><img src="/logo.svg" alt="VIZ+"></a></div>
 		<div class="menu-list captions">
 			<div class="menu-bg">
-				{menu}
+				{menu}{select-lang}
 			</div>
 		</div>
 	</div>

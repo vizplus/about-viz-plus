@@ -2604,6 +2604,31 @@ a.no-shadow{
 .select-lang a:hover{
 	color:rgba(0,30,0,0.8);
 }
+
+.select-lang-menu{
+	font-size:18px;
+	text-align:center;
+	display:inline-block;
+	height:64px;
+	padding:0 25px;
+	margin:0;
+	line-height:64px;
+	vertical-align: top;
+	position: relative;
+	box-shadow: none;
+}
+.select-lang-menu a{
+	box-shadow:none;
+	color:rgba(50,80,50,0.8);
+	margin:4px;
+}
+.select-lang-menu a.current{
+	color:rgba(50,80,50,1.0);
+	font-weight:bold;
+}
+.select-lang-menu a:hover{
+	color:rgba(0,30,0,0.8);
+}
 @media only screen and (min-width:0) and (max-width:1650px){
 	.cards-menu{
 		display:none !important;
@@ -2614,6 +2639,10 @@ a.no-shadow{
 }
 @media only screen and (min-width:0) and (max-width:968px){
 	.header .menu-el{
+		padding:0 15px;
+		font-size:18px;
+	}
+	.header .select-lang-menu{
 		padding:0 15px;
 		font-size:18px;
 	}
@@ -2677,6 +2706,9 @@ a.no-shadow{
 	.header .menu-el:after{
 		width:100%;
 		margin-left:0;
+	}
+	.header .select-lang-menu{
+		display:block;
 	}
 	.presentation{
 		max-width:100%;

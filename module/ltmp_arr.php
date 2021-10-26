@@ -58,7 +58,7 @@ function set_l10n($id){
 }
 
 $ltmp_arr=[];
-$ltmp_presets=['ru-RU'=>'ru','ru'=>'ru',/*'en-US'=>'en','en'=>'en'*/];
+$ltmp_presets=['ru-RU'=>'ru','ru'=>'ru','en-US'=>'en','en-GB'=>'en','en'=>'en'];
 $ltmp_current=false;
 $ltmp_default='ru';
 $ltmp_base=[
@@ -78,7 +78,7 @@ $ltmp_base=[
 		'name'=>'English',
 		'local-name'=>'English',
 		'ru-name'=>'Английский язык',
-		'active'=>false,
+		'active'=>true,
 	],
 ];
 
@@ -116,7 +116,6 @@ else{
 			@setcookie('l10n',$preferred_lang,31536000+time(),'/');
 		}
 	}
-
 }
 if(isset($_GET['lang'])){
 	$preferred_lang=$_GET['lang'];

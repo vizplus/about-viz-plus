@@ -7,7 +7,7 @@ $Parsedown = new Parsedown();
 $replace['description']='Почему надо инвестировать в ВИЗ: Третья деятельность - социальная активность, Визономика - экономика социальной активности, Социальный капитал - нефинансовый инструмент влияния, Децентрализованное управление.';
 
 $cache=false;
-if(file_exists('./invest4.cache')){
+if(file_exists('./invest.cache')){
 	$cache=file_get_contents('./invest.cache');
 	print $cache;
 }
